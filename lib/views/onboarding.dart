@@ -1,4 +1,4 @@
-import 'package:coffee_store_ui/homepage.dart';
+import 'package:coffee_store_ui/views/homepage.dart';
 import 'package:flutter/material.dart';
 
 class Onboarding extends StatefulWidget {
@@ -22,8 +22,7 @@ class _OnboardingState extends State<Onboarding> {
       });
     } else {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const HomePage())
-          );
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
     }
   }
 
