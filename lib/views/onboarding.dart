@@ -1,3 +1,4 @@
+import 'package:coffee_store_ui/homepage.dart';
 import 'package:flutter/material.dart';
 
 class Onboarding extends StatefulWidget {
@@ -12,13 +13,33 @@ class _OnboardingState extends State<Onboarding> {
   PageController pages = PageController();
   int currentIndex = 0;
 
+  void goToNextPage() {
+    if (currentIndex < pageList.length - 1) {
+      pages.nextPage(
+          duration: const Duration(microseconds: 500), curve: Curves.easeIn);
+      setState(() {
+        currentIndex++;
+      });
+    } else {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const HomePage())
+          );
+    }
+  }
+
+  // onPressed: () {
+  //   pages.animateToPage(currentIndex + 1,
+  //       duration: const Duration(microseconds: 1),
+  //       curve: Curves.easeIn);
+  // },
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: MediaQuery.of(context).size.height * 0.65,
             child: PageView.builder(
               onPageChanged: (value) {
                 setState(() {
@@ -39,26 +60,28 @@ class _OnboardingState extends State<Onboarding> {
             ),
           ),
           Container(
-            decoration: BoxDecoration(color: Colors.brown.shade700),
-            height: MediaQuery.of(context).size.height * 0.3,
+            decoration: BoxDecoration(color: Colors.brown.shade800),
+            height: MediaQuery.of(context).size.height * 0.35,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Time for a coffee break...',
+                  'Time for a coffee break ....',
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                       color: Colors.white),
                 ),
                 const Text(
-                  'Your daily dose of fresh brew delivered to your doorstep. Start your coffee journey now!',
+                  'Your daily dose of fresh brew delivered to \n your doorstep. Start your coffee journey now!',
                   style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
                       color: Colors.white),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -74,25 +97,25 @@ class _OnboardingState extends State<Onboarding> {
                           width: index == currentIndex ? 40 : 10,
                           duration: const Duration(milliseconds: 300))),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(13)),
-                        backgroundColor: Colors.orange,
-                        minimumSize: const Size(50, 50)),
-                    onPressed: () {
-                      pages.animateToPage(currentIndex + 1,
-                          duration: const Duration(microseconds: 1),
-                          curve: Curves.easeIn);
-                    },
-                    child: const Text(
-                      'Get Started',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                    ))
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25)),
+                          backgroundColor: Colors.orange,
+                          minimumSize: const Size(double.infinity, 50)),
+                      onPressed: () {
+                        goToNextPage();
+                      },
+                      child: const Text(
+                        'Get Started',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      )),
+                )
               ],
             ),
           )
