@@ -16,7 +16,7 @@ class _OnboardingState extends State<Onboarding> {
   void goToNextPage() {
     if (currentIndex < pageList.length - 1) {
       pages.nextPage(
-          duration: const Duration(microseconds: 500), curve: Curves.easeIn);
+          duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
       setState(() {
         currentIndex++;
       });
@@ -25,12 +25,6 @@ class _OnboardingState extends State<Onboarding> {
           context, MaterialPageRoute(builder: (context) => const HomePage()));
     }
   }
-
-  // onPressed: () {
-  //   pages.animateToPage(currentIndex + 1,
-  //       duration: const Duration(microseconds: 1),
-  //       curve: Curves.easeIn);
-  // },
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +45,7 @@ class _OnboardingState extends State<Onboarding> {
                   curIndex.image,
                   width: double.infinity,
                   height: double.infinity,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.cover,
                 );
               },
               itemCount: pageList.length,
@@ -59,22 +53,23 @@ class _OnboardingState extends State<Onboarding> {
             ),
           ),
           Container(
+            padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(color: Colors.brown.shade800),
             height: MediaQuery.of(context).size.height * 0.35,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Time for a coffee break ....',
-                  style: TextStyle(
+                Text(
+                  pageList[currentIndex].text,
+                  style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                       color: Colors.white),
                 ),
-                const Text(
-                  'Your daily dose of fresh brew delivered to \n your doorstep. Start your coffee journey now!',
-                  style: TextStyle(
+                Text(
+                  pageList[currentIndex].subtext,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w300,
                       color: Colors.white),
@@ -139,14 +134,14 @@ class PageData {
 List<PageData> pageList = [
   PageData(
       image: 'assets/coffeeCup.png',
-      text: 'Time for a coffee break....',
+      text: 'Time for a coffee break ....',
       subtext:
           'Your daily dose of fresh brew delivered to your doorstep. Start your coffee journey now!'),
   PageData(
       image: 'assets/coffeeCup.png',
       text: 'Fast Delivery',
       subtext:
-          'Savings on meals and free delivery fees from great local and national resturants, updated for you each week.'),
+          'Savor the delightful notes of freshly brewed coffee, complemented by a touch of decadent chocolate. Our Cappuccino is a true delight for your senses, providing a moment of bliss with every sip.'),
   PageData(
       image: 'assets/coffeeCup.png',
       text: 'Reward Surprises',

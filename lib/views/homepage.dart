@@ -45,8 +45,7 @@ class _HomePageState extends State<HomePage> {
                             ]
                                 .map(
                                   (text) => Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16.0),
+                                    padding: const EdgeInsets.only(right: 16),
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                           shape: RoundedRectangleBorder(

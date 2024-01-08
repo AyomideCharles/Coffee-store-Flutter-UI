@@ -22,7 +22,7 @@ List<Coffee> coffee = [
       type: 'Cappucino',
       image: 'assets/cup2.png',
       price: 4.53,
-      topping: 'with Chocolate'),
+      topping: 'with Oat Milk'),
   Coffee(
       type: 'Cappucino',
       image: 'assets/cup3.png',
