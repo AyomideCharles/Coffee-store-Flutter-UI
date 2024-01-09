@@ -1,4 +1,4 @@
-import 'package:coffee_store_ui/views/homepage.dart';
+import 'package:coffee_store_ui/bottomnv.dart';
 import 'package:flutter/material.dart';
 
 class Onboarding extends StatefulWidget {
@@ -22,7 +22,7 @@ class _OnboardingState extends State<Onboarding> {
       });
     } else {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const HomePage()));
+          context, MaterialPageRoute(builder: (context) => const BottomNav()));
     }
   }
 
@@ -53,11 +53,10 @@ class _OnboardingState extends State<Onboarding> {
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.only(top: 30),
             decoration: BoxDecoration(color: Colors.brown.shade800),
             height: MediaQuery.of(context).size.height * 0.35,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   pageList[currentIndex].text,
@@ -65,6 +64,9 @@ class _OnboardingState extends State<Onboarding> {
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                       color: Colors.white),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 Text(
                   pageList[currentIndex].subtext,
@@ -90,6 +92,9 @@ class _OnboardingState extends State<Onboarding> {
                           margin: const EdgeInsets.symmetric(horizontal: 5),
                           width: index == currentIndex ? 40 : 10,
                           duration: const Duration(milliseconds: 300))),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15),
@@ -141,7 +146,7 @@ List<PageData> pageList = [
       image: 'assets/coffeeCup.png',
       text: 'Fast Delivery',
       subtext:
-          'Savor the delightful notes of freshly brewed coffee, complemented by a touch of decadent chocolate. Our Cappuccino is a true delight for your senses, providing a moment of bliss with every sip.'),
+          'Savor the delightful notes of freshly brewed coffee, complemented by a touch of decadent chocolate. '),
   PageData(
       image: 'assets/coffeeCup.png',
       text: 'Reward Surprises',

@@ -1,5 +1,6 @@
 import 'package:coffee_store_ui/views/detailspage.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import '../model/coffeemodel.dart';
 
 class HomePage extends StatefulWidget {
@@ -48,10 +49,10 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.w400),
                           ),
                           SizedBox(
-                            width: 10,
+                            width: 20,
                           ),
                           Icon(
-                            Icons.arrow_downward,
+                            Iconsax.arrow_down5,
                             color: Colors.white,
                           )
                         ],
@@ -75,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
-                              for (  String coffeeType in [
+                              for (String coffeeType in [
                                 'Cappuccino',
                                 'Machiato',
                                 'Latte',
@@ -148,11 +149,14 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(20),
-                                      child: Image.asset(
-                                        coffee[index].image,
-                                        height: 150,
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
+                                      child: Hero(
+                                        tag: 'animate-${coffee[index].image}',
+                                        child: Image.asset(
+                                          coffee[index].image,
+                                          height: 150,
+                                          width: double.infinity,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(

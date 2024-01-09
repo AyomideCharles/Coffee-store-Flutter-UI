@@ -1,5 +1,5 @@
-import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import '../model/coffeemodel.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -22,8 +22,7 @@ class _DetailsPageState extends State<DetailsPage> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,17 +38,19 @@ class _DetailsPageState extends State<DetailsPage> {
                   ),
                   Flexible(
                     flex: 15,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(200),
-                      child: Image.asset(
-                        widget.coffeedetail.image,
-                        height: 350,
-                        width: 350,
-                        fit: BoxFit.cover,
+                    child: ClipOval(
+                      child: Hero(
+                        tag: 'animate-${widget.coffeedetail.image}',
+                        child: Image.asset(
+                          widget.coffeedetail.image,
+                          height: 350,
+                          width: 350,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
-                  const Flexible(flex: 1, child: Icon(FeatherIcons.heart))
+                  const Flexible(flex: 1, child: Icon(Iconsax.heart))
                 ],
               ),
               ListTile(
@@ -57,7 +58,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 title: Text(
                   widget.coffeedetail.type,
                   style: const TextStyle(
-                      fontSize: 27, fontWeight: FontWeight.w700),
+                      fontSize: 25, fontWeight: FontWeight.w600),
                 ),
                 subtitle: Text(widget.coffeedetail.topping),
                 trailing: Row(
@@ -72,14 +73,14 @@ class _DetailsPageState extends State<DetailsPage> {
                     ),
                     const Text('4.5',
                         style: TextStyle(
-                            fontSize: 27, fontWeight: FontWeight.w700))
+                            fontSize: 25, fontWeight: FontWeight.w600))
                   ],
                 ),
               ),
               const Divider(),
               const Text(
                 'Description',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 10,
@@ -91,7 +92,7 @@ class _DetailsPageState extends State<DetailsPage> {
               ),
               const Text(
                 'Size',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 10,
@@ -101,7 +102,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   children: List.generate(
                     3,
                     (index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.only(right: 10),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             minimumSize: const Size(110, 50),
@@ -127,7 +128,9 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                     ),
                   )),
-              const Spacer(),
+              const SizedBox(
+                height: 20,
+              ),
               ListTile(
                 title: const Text('Price'),
                 subtitle: Text(
