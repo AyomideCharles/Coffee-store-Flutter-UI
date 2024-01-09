@@ -1,16 +1,8 @@
 # coffee_store_ui
 
-A new Flutter project.
+A simple Flutter UI for a coffee Store
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Screenshots
+<img src="https://github.com/dettyboy2022/Coffee-store-Flutter-UI/assets/108200853/0cd729bd-bdac-4a55-b6c9-e050c1d27305" width="250">
+<img src="https://github.com/dettyboy2022/Coffee-store-Flutter-UI/assets/108200853/c6dc88db-c87e-4613-9c5d-6fc3c17abe04" width="250">
+<img src="https://github.com/dettyboy2022/Coffee-store-Flutter-UI/assets/108200853/e7646031-f90c-4a1e-a69c-e2719657b1f8" width="250">
