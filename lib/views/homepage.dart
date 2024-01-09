@@ -1,6 +1,5 @@
 import 'package:coffee_store_ui/views/detailspage.dart';
 import 'package:flutter/material.dart';
-
 import '../model/coffeemodel.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,89 +10,140 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String selectedCoffeeType = 'Cappuccino';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height / 5,
-                  decoration: const BoxDecoration(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(top: 40),
+                    height: MediaQuery.of(context).size.height / 5,
+                    decoration: const BoxDecoration(
                       gradient: LinearGradient(
-                    colors: [Colors.black, Colors.white],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  )),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Column(
-                    children: [
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            ...[
-                              'Cappuccino',
-                              'Machiato',
-                              'Latte',
-                              'Animation',
-                              'Flutter',
-                            ]
-                                .map(
-                                  (text) => Padding(
-                                    padding: const EdgeInsets.only(right: 16),
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8)),
-                                          backgroundColor:
-                                              const Color(0xFFC67C4E)),
-                                      onPressed: () {},
-                                      child: Text(
-                                        text,
-                                        style: const TextStyle(
-                                            color: Colors.white),
+                        colors: [Color(0xFF131313), Color(0xE0313131)],
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft,
+                      ),
+                    ),
+                    child: const ListTile(
+                      title: Text(
+                        'Location',
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      subtitle: Row(
+                        children: [
+                          Text(
+                            'Lagos, Nigeria',
+                            style: TextStyle(
+                                fontSize: 21,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Icon(
+                            Icons.arrow_downward,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
+                      trailing: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            'https://wallpapercave.com/wp/wp4531250.jpg'),
+                        backgroundColor: Colors.transparent,
+                        radius: 50,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Column(
+                      children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              for (  String coffeeType in [
+                                'Cappuccino',
+                                'Machiato',
+                                'Latte',
+                                'Americano',
+                                'Espresso',
+                              ])
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 16),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      backgroundColor:
+                                          selectedCoffeeType == coffeeType
+                                              ? const Color(0xFFC67C4E)
+                                              : Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        selectedCoffeeType = coffeeType;
+                                      });
+                                    },
+                                    child: Text(
+                                      coffeeType,
+                                      style: TextStyle(
+                                        color: selectedCoffeeType == coffeeType
+                                            ? Colors.white
+                                            : Colors.black,
                                       ),
                                     ),
                                   ),
-                                )
-                                .toList(),
-                          ],
+                                ),
+                            ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      GridView.builder(
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        GridView.builder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                                  mainAxisExtent: 280,
-                                  crossAxisSpacing: 20,
-                                  mainAxisSpacing: 20,
-                                  crossAxisCount: 2),
+                            mainAxisExtent: 280,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20,
+                            crossAxisCount: 2,
+                          ),
                           itemCount: 4,
                           itemBuilder: (_, index) {
                             final selectedCoffee = coffee[index];
                             return GestureDetector(
                               onTap: () {
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => DetailsPage(
-                                              coffeedetail: selectedCoffee,
-                                            )));
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailsPage(
+                                      coffeedetail: selectedCoffee,
+                                    ),
+                                  ),
+                                );
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20)),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
                                 child: Column(
                                   children: [
                                     ClipRRect(
@@ -117,8 +167,9 @@ class _HomePageState extends State<HomePage> {
                                           Text(
                                             coffee[index].type,
                                             style: const TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w500),
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
                                           const SizedBox(
                                             height: 5,
@@ -126,19 +177,20 @@ class _HomePageState extends State<HomePage> {
                                           Text(
                                             coffee[index].topping,
                                             style: const TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 15),
+                                              color: Colors.grey,
+                                              fontSize: 15,
+                                            ),
                                           ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                coffee[index].price.toString(),
+                                                '\$ ${coffee[index].price.toString()}',
                                                 style: const TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                        FontWeight.w500),
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
@@ -148,38 +200,49 @@ class _HomePageState extends State<HomePage> {
                                                       const Color(0xFFC67C4E),
                                                 ),
                                                 child: IconButton(
-                                                    onPressed: () {},
-                                                    icon:
-                                                        const Icon(Icons.add)),
-                                              )
+                                                  onPressed: () {},
+                                                  icon: const Icon(Icons.add),
+                                                ),
+                                              ),
                                             ],
-                                          )
+                                          ),
                                         ],
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
                             );
-                          })
-                    ],
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                )
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.all(15.0),
-              child: TextField(
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(borderSide: BorderSide.none),
-                    hintText: 'Search Coffee',
-                    prefixIcon: Icon(Icons.search),
-                    suffixIcon: Icon(Icons.sort)),
+                ],
               ),
-            ),
-          ],
+              Positioned(
+                top: 140,
+                right: 15,
+                left: 15,
+                child: TextField(
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: const BorderSide(),
+                          borderRadius: BorderRadius.circular(10)),
+                      hintText: 'Search Coffee',
+                      prefixIcon: const Icon(Icons.search),
+                      suffixIcon: Container(
+                          margin: const EdgeInsets.only(right: 5),
+                          decoration: BoxDecoration(
+                              color: const Color(0xFFC67C4E),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: const Icon(Icons.sort))),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

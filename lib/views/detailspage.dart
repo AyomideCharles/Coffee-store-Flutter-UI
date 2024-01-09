@@ -1,6 +1,5 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
-
 import '../model/coffeemodel.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -13,6 +12,10 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  int selectedSize = 0;
+
+  List size = ['S', 'M', 'L'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +64,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      FeatherIcons.star,
+                      Icons.star,
                       color: Colors.yellow.shade900,
                     ),
                     const SizedBox(
@@ -82,7 +85,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 height: 10,
               ),
               const Text(
-                  'Enjoy the rich and aromatic experience of our signature Cappuccino. Indulge in the perfect blend of velvety espresso, steamed milk, and a luxurious layer of frothy foam. This exquisite beverage is a harmonious symphony of bold flavors and smooth textures. '),
+                  'Enjoy the rich and aromatic experience of our signature Cappuccino. Indulge in the perfect blend of velvety espresso, steamed milk, and a luxurious layer of frothy foam. This exquisite beverage is a harmonious symphony of bold flavors and smooth textures..'),
               const SizedBox(
                 height: 10,
               ),
@@ -102,14 +105,24 @@ class _DetailsPageState extends State<DetailsPage> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             minimumSize: const Size(110, 50),
-                            backgroundColor: Colors.white,
+                            backgroundColor: selectedSize == index
+                                ? Colors.orange.shade200
+                                : Colors.white,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
-                            side: const BorderSide(color: Colors.grey)),
-                        onPressed: () {},
-                        child: const Text(
-                          'Hello',
-                          style: TextStyle(color: Colors.black),
+                            side: BorderSide(
+                                color: selectedSize == index
+                                    ? Colors.orange
+                                    : Colors.grey)),
+                        onPressed: () {
+                          setState(() {
+                            selectedSize = index;
+                          });
+                        },
+                        child: Text(
+                          size[index],
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 17),
                         ),
                       ),
                     ),
@@ -118,7 +131,7 @@ class _DetailsPageState extends State<DetailsPage> {
               ListTile(
                 title: const Text('Price'),
                 subtitle: Text(
-                  widget.coffeedetail.price.toString(),
+                  '\$ ${widget.coffeedetail.price.toString()}',
                   style: const TextStyle(
                       color: Colors.orange,
                       fontSize: 25,

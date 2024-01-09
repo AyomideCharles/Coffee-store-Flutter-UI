@@ -19,18 +19,18 @@ List<Coffee> coffee = [
       price: 4.53,
       topping: 'with Chocolate'),
   Coffee(
-      type: 'Cappucino',
+      type: 'Espresso',
       image: 'assets/cup2.png',
-      price: 4.53,
+      price: 4.00,
       topping: 'with Oat Milk'),
   Coffee(
-      type: 'Cappucino',
+      type: 'Americano',
       image: 'assets/cup3.png',
-      price: 4.53,
+      price: 3.78,
       topping: 'with Chocolate'),
   Coffee(
-      type: 'Cappucino',
+      type: 'Latte',
       image: 'assets/cup4.png',
-      price: 4.53,
+      price: 4.20,
       topping: 'with Chocolate'),
 ];
